@@ -16,7 +16,10 @@ namespace BookShop.Controllers
         // GET: HomeController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            return View(new BookViewModel
+            {
+                
+            });
         }
 
         // GET: HomeController/Create
@@ -43,7 +46,7 @@ namespace BookShop.Controllers
         // GET: HomeController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(new BookEditModel());
         }
 
         // POST: HomeController/Edit/5
