@@ -10,7 +10,7 @@ namespace BookShop.Controllers
         // GET: HomeController
         public ActionResult Index()
         {
-            return View();
+            return View(Books());
         }
 
         // GET: HomeController/Details/5
