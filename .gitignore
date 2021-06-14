@@ -6,3 +6,17 @@
 BookShop.Data/obj/BookShop.Data.csproj.nuget.dgspec.json
 
 BookShop.Data/obj/
+
+BookShop.Data/Migrations/ApplicationDbContextModelSnapshot.cs
+
+BookShop.Shared/bin/Debug/netcoreapp3.1/BookShop.Shared.deps.json
+
+BookShop.Shared/bin/Debug/netcoreapp3.1/BookShop.Shared.dll
+
+BookShop.Shared/bin/Debug/netcoreapp3.1/BookShop.Shared.pdb
+
+BookShop.Shared/obj/Debug/netcoreapp3.1/BookShop.Shared.csproj.FileListAbsolute.txt
+
+BookShop.Shared/obj/Debug/netcoreapp3.1/BookShop.Shared.dll
+
+BookShop.Shared/obj/Debug/netcoreapp3.1/BookShop.Shared.pdb
