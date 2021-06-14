@@ -24,17 +24,9 @@ namespace BookShop.Controllers
 
         public ActionResult Details(int id)
         {
-            var books = Books();
-            var bookModel = books.FirstOrDefault(book => book.Id == id);
-            var book = new BookViewModel
-            {
-                Id = bookModel.Id,
-                BookTitle = bookModel.BookTitle,
-                AuthorName = bookModel.AuthorName,
-                Genre = bookModel.Genre
-            };
+            var bookItem = _repository.ViewBookById(id);
 
-            return View(book);
+            return View(bookItem);
         }
 
         public ActionResult Create()

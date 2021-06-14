@@ -34,7 +34,22 @@ namespace BookShop.Data.Repositories
 
         public IBookViewModel ViewBookById(int id)
         {
-            return null;
+            var bookEntity = _context.Books
+                .Include(a => a.Author)
+                .Include(g => g.Genre)
+                .FirstOrDefault(b => b.Id == id);
+
+            var book = new BookDto
+            {
+                Id = bookEntity.Id,
+                AuthorName = $"{bookEntity.Author.AuthorFirstName} {bookEntity.Author.AuthorLastName}",
+                BookTitle = bookEntity.Title,
+                Genre = bookEntity.Genre.GenreName,
+                YearPublished = bookEntity.YearPublished.ToString(),
+                IsCheckedOut = bookEntity.IsCheckedOut
+            };
+
+            return book;
         }
 
         public IBookEditDto EditBook(int id)
