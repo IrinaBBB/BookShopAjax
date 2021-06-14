@@ -2,33 +2,37 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BookShop.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: HomeController
         public ActionResult Index()
         {
             return View(Books());
         }
 
-        // GET: HomeController/Details/5
         public ActionResult Details(int id)
         {
-            return View(new BookViewModel
+            var books = Books();
+            var bookModel = books.FirstOrDefault(book => book.Id == id);
+            var book = new BookViewModel
             {
-                
-            });
+                Id = bookModel.Id,
+                BookTitle = bookModel.BookTitle,
+                AuthorName = bookModel.AuthorName,
+                Genre = bookModel.Genre
+            };
+
+            return View(book);
         }
 
-        // GET: HomeController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: HomeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -43,13 +47,11 @@ namespace BookShop.Controllers
             }
         }
 
-        // GET: HomeController/Edit/5
         public ActionResult Edit(int id)
         {
             return View(new BookEditModel());
         }
 
-        // POST: HomeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -64,13 +66,11 @@ namespace BookShop.Controllers
             }
         }
 
-        // GET: HomeController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: HomeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
