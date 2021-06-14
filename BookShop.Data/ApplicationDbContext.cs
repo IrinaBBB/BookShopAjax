@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-
 namespace BookShop.Data
 {
     public partial class ApplicationDbContext : DbContext
