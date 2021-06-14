@@ -1,2 +1,8 @@
 
 .vs/
+
+*.cache
+
+BookShop.Data/obj/BookShop.Data.csproj.nuget.dgspec.json
+
+BookShop.Data/obj/
