@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BookShop.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace BookShop.Controllers
 {
@@ -79,5 +81,32 @@ namespace BookShop.Controllers
                 return View();
             }
         }
+
+        private IList<BookListItemModel> Books() =>
+            new List<BookListItemModel>
+            {
+                new BookListItemModel
+                {
+                    Id = 1, 
+                    AuthorName = "Jules Verne",
+                    BookTitle = "The Mysterious Island",
+                    Genre = "Adventure fiction"
+                },
+                new BookListItemModel
+                {
+                    Id = 2,
+                    AuthorName = "Victor Hugo",
+                    BookTitle = "Notre-Dame de Paris",
+                    Genre = "Gothic fiction"
+                },
+                new BookListItemModel
+                {
+                    Id = 3,
+                    AuthorName = "Herbert George Wells",
+                    BookTitle = "The War of the Worlds",
+                    Genre = "Science fiction"
+                }
+            };
+
     }
 }
