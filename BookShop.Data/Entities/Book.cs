@@ -1,4 +1,4 @@
-﻿namespace BookShop.Data
+﻿namespace BookShop.Data.Entities
 {
     public partial class Book
     {

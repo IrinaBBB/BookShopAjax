@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BookShop.Data
+namespace BookShop.Data.Entities
 {
     public partial class Author
     {

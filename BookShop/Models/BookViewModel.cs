@@ -1,6 +1,8 @@
-﻿namespace BookShop.Models
+﻿using BookShop.Shared.Interfaces;
+
+namespace BookShop.Models
 {
-    public class BookViewModel
+    public class BookViewModel : IBookViewModel
     {
         public int Id { get; set; }
         public string BookTitle { get; set; }
