@@ -1,4 +1,5 @@
 ﻿using BookShop.Models;
+using BookShop.Shared.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -8,9 +9,17 @@ namespace BookShop.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private readonly IBooksRepository _repository;
+
+        public HomeController(IBooksRepository repository)
         {
-            return View(Books());
+            _repository = repository;
+        }
+
+        public IActionResult Index()
+        {
+            var books = _repository.GetBookList();
+            return View(books);
         }
 
         public ActionResult Details(int id)

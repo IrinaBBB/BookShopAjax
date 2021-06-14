@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BookShop.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookShop.Data
 {
@@ -11,6 +12,5 @@ namespace BookShop.Data
         public virtual DbSet<Author> Authors { get; set; }
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Genre> Genres { get; set; }
-        
     }
 }

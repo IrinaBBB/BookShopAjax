@@ -1,10 +1,9 @@
-﻿using BookShop.Shared.BooksDto;
-using BookShop.Shared.Interfaces;
+﻿using BookShop.Shared.Interfaces;
 using System.Collections.Generic;
 
 namespace BookShop.Models
 {
-    public class BookEditModel : IBookEditModel
+    public class BookEditModel : IBookEditDto
     {
         public int Id { get; set; }
         public string BookTitle { get; set; }
