@@ -1,6 +1,6 @@
 ﻿using BookShop.Shared.Interfaces;
 
-namespace BookShop.Shared.BooksDto
+namespace BookShop.Data.Repositories
 {
     public class CollectionItem : ICollectionItem
     {

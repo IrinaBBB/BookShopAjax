@@ -6,8 +6,8 @@ namespace BookShop.Shared.Interfaces
     {
         int Id { get; set; }
         string BookTitle { get; set; }
-        string AuthorId { get; set; }
-        string GenreId { get; set; }
+        int AuthorId { get; set; }
+        int GenreId { get; set; }
         string YearPublished { get; set; }
         bool IsCheckedOut { get; set; }
 

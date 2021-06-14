@@ -54,7 +54,34 @@ namespace BookShop.Data.Repositories
 
         public IBookEditDto EditBook(int id)
         {
-            return null;
+            var authors = _context.Authors.ToList();
+            var genres = _context.Genres.ToList();
+            var book = new BookEditDto();
+
+            if (id != 0)
+            {
+                var bookEntity = _context.Books.FirstOrDefault(b => b.Id == id);
+                book.Id = bookEntity.Id;
+                book.BookTitle = bookEntity.Title;
+                book.AuthorId = bookEntity.AuthorId;
+                book.GenreId = bookEntity.GenreId;
+                book.IsCheckedOut = bookEntity.IsCheckedOut;
+                book.YearPublished = bookEntity.YearPublished.ToString();
+            }
+
+            authors.ForEach(a => book.Authors.Add(new CollectionItem
+            {
+                Text = $"{a.AuthorFirstName} {a.AuthorLastName}",
+                Value = a.Id.ToString()
+            }));
+
+            genres.ForEach(g => book.Genres.Add(new CollectionItem
+            {
+                Text = g.GenreName,
+                Value = g.Id.ToString()
+            }));
+
+            return book;
         }
 
         public bool SaveBook(IBookEditDto book)
