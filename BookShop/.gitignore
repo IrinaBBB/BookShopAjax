@@ -12,6 +12,7 @@
 
 # .vscode
 .vscode
+.vs
 bin/Debug/net5.0
 obj/
 # User-specific files (MonoDevelop/Xamarin Studio)
