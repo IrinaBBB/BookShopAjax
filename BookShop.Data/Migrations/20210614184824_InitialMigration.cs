@@ -44,7 +44,7 @@ namespace BookShop.Data.Migrations
                     GenreId = table.Column<int>(type: "int", nullable: false),
                     YearPublished = table.Column<int>(type: "int", nullable: false),
                     AuthorId = table.Column<int>(type: "int", nullable: false),
-                    IsCheckeddOut = table.Column<bool>(type: "bit", nullable: false)
+                    IsCheckedOut = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
