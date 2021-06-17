@@ -1,4 +1,5 @@
-﻿using BookShop.Models;
+﻿using BookShop.Data.Repositories;
+using BookShop.Models;
 using BookShop.Shared.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -48,7 +49,7 @@ namespace BookShop.Controllers
             }
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult EditBook(int id)
         {
             var bookDto = _repository.EditBook(id);
 
@@ -77,10 +78,25 @@ namespace BookShop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult EditBook(BookEditModel book)
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return View(book);
+
+                var bookDto = new BookEditDto
+                {
+                    AuthorId = book.AuthorId,
+                    BookTitle = book.BookTitle,
+                    GenreId = book.GenreId,
+                    YearPublished = book.YearPublished,
+                    IsCheckedOut = book.IsCheckedOut,
+                    Id = book.Id
+                };
+
+                _repository.SaveBook(bookDto);
+
                 return RedirectToAction(nameof(Index));
             }
             catch

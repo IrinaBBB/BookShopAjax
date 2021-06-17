@@ -1,5 +1,7 @@
-﻿using BookShop.Shared.Interfaces;
+﻿using BookShop.Data.Entities;
+using BookShop.Shared.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -86,7 +88,28 @@ namespace BookShop.Data.Repositories
 
         public bool SaveBook(IBookEditDto book)
         {
-            return false;
+            Book bookEntity;
+
+            if (book.Id == 0)
+                bookEntity = new Book();
+            else
+                bookEntity = _context.Books.FirstOrDefault(b => b.Id == book.Id);
+
+            bookEntity.Id = book.Id;
+            bookEntity.Title = book.BookTitle;
+            bookEntity.GenreId = book.GenreId;
+            bookEntity.IsCheckedOut = book.IsCheckedOut;
+            bookEntity.YearPublished = Int32.Parse(book.YearPublished);
+            bookEntity.AuthorId = book.AuthorId;
+
+            if (book.Id == 0)
+                _context.Add(bookEntity);
+            else
+                _context.Update(bookEntity);
+
+            _context.SaveChanges();
+
+            return true;
         }
 
         public bool DeleteBook(int id)
