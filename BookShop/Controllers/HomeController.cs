@@ -105,23 +105,18 @@ namespace BookShop.Controllers
             }
         }
 
-        public ActionResult Delete(int id)
+        
+        public ActionResult DeleteBook(int id)
         {
-            return View();
+            _repository.DeleteBook(id);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         private IList<BookListItemModel> Books() =>

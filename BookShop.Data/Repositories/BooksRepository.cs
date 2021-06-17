@@ -114,7 +114,10 @@ namespace BookShop.Data.Repositories
 
         public bool DeleteBook(int id)
         {
-            return false;
+            _context.Remove(_context.Books.Single(b => b.Id == id));
+            _context.SaveChanges();
+
+            return true;
         }
     }
 }
