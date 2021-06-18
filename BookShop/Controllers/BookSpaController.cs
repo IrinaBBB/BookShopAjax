@@ -26,6 +26,15 @@ namespace BookShop.Controllers
             return Json(books);
         }
 
+        public IActionResult ViewBook(int id)
+        {
+            if (!IsAjaxRequest())
+                return Content("Information cannot be displayed");
+
+            var bookItem = _repository.ViewBookById(id);
+            return PartialView("_ViewBook", bookItem);
+        }
+
         private bool IsAjaxRequest() => Request.Headers["X-Requested-With"] == "XMLHttpRequest";
     }
 }

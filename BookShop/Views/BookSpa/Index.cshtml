@@ -29,6 +29,10 @@
     </tbody>
 </table>
 
+<div id="bookFrame">
+
+</div>
+
 @section Scripts {
     <script>
         $(function () {
@@ -63,12 +67,47 @@
             });
         });
 
+        $('#bookFrame').dialog({
+            title: '',
+            autoOpen: false,
+            height: 200,
+            width: 600,
+            modal: true,
+            buttons: {
+                Ok: function () {
+                    $(this).dialog('close');
+                }
+            },
+            close: function () {
+                $(this).html('');
+            }
+        });
+
         // adding a namespace
         var BookSpaNs = BookSpaNs || {};
 
         BookSpaNs.Books = function () {
             var viewBook = function (id) {
-                alert('The book to view:-- ' + id);
+                var $bookFrame = $('#bookFrame');
+
+                $.ajax({
+                    url: '/BookSpa/ViewBook',
+                    method: 'GET',
+                    data: {
+                        id: id
+                    }
+                })
+                .done(function (result) {
+                    $bookFrame
+                        .html(result)
+                        .dialog('option', 'height', 450)
+                        .dialog('option', 'width', 800)
+                        .dialog('option', 'title', 'View Book | Id = ' + id)
+                        .dialog('open');
+                })
+                .fail(function () {
+                    $bookFrame.html('Specified record was not found');
+                });
             }
 
             return {

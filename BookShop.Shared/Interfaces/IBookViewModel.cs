@@ -15,10 +15,10 @@ namespace BookShop.Shared.Interfaces
 
         int Id { get; set; }
 
-        [DisplayName("Year Published")]
+        [DisplayName("Book is Checked Out")]
         bool IsCheckedOut { get; set; }
 
-        [DisplayName("Book is Checked Out")]
+        [DisplayName("Year Published")]
         string YearPublished { get; set; }
     }
 }

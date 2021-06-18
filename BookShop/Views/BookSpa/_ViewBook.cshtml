@@ -1,0 +1,52 @@
+﻿@model BookShop.Shared.Interfaces.IBookViewModel
+
+@{
+    ViewData["Title"] = "Book Details";
+}
+
+<h1>Book Details</h1>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-4">
+            @Html.DisplayNameFor(model => model.BookTitle)
+        </dt>
+        <dd class="col-8">
+            @Html.DisplayFor(model => model.BookTitle)
+        </dd>
+        <dt class="col-4">
+            @Html.DisplayNameFor(model => model.AuthorName)
+        </dt>
+        <dd class="col-8">
+            @Html.DisplayFor(model => model.AuthorName)
+        </dd>
+        <dt class="col-4">
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+        <dd class="col-8">
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+        <dt class="col-4">
+            @Html.DisplayNameFor(model => model.YearPublished)
+        </dt>
+        <dd class="col-8">
+            @Html.DisplayFor(model => model.YearPublished)
+        </dd>
+        <dt class="col-4">
+            @Html.DisplayNameFor(model => model.IsCheckedOut)
+        </dt>
+        <dd class="col-8">
+            @Html.DisplayFor(model => model.IsCheckedOut)
+        </dd>
+    </dl>
+</div>
+@*<div>
+    @Html.ActionLink("Edit", "EditBook", new { id = Model.Id }) |
+    <a asp-action="Index">Back to List</a>
+</div>*@
