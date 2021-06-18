@@ -14,8 +14,18 @@ namespace BookShop.Controllers
 
         public IActionResult Index()
         {
-            var books = _repository.GetBookList();
-            return View(books);
+            return View();
         }
+
+        public IActionResult GetBookList()
+        {
+            if (!IsAjaxRequest())
+                return Content("Information cannot be displayed");
+
+            var books = _repository.GetBookList();
+            return Json(books);
+        }
+
+        private bool IsAjaxRequest() => Request.Headers["X-Requested-With"] == "XMLHttpRequest";
     }
 }

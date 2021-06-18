@@ -1,6 +1,4 @@
-﻿@model IEnumerable<BookShop.Shared.Interfaces.IBookListItemModel>
-
-@{
+﻿@{
     ViewData["Title"] = "Books SPA";
 }
 
@@ -28,35 +26,39 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BookTitle)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AuthorName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Genre)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "EditBook", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "DeleteBook", new { id = item.Id })
-                </td>
-            </tr>
-        }
+       
     </tbody>
 </table>
 
 @section Scripts {
      <script>
          $(function () {
-             $("#bookList").dataTable();
+             $("#bookList").dataTable({
+                 ajax: {
+                     url: '/BookSpa/GetBookList',
+                     // dataSrc is used to tell JQuery to use the whole dataset, not just its specific part
+                     dataSrc: ''
+                 },
+                 columns: [
+                     {
+                         data: 'id'
+                     },
+                     {
+                         data: 'bookTitle'
+                     },
+                     {
+                         data: 'authorName'
+                     },
+                     {
+                         data: 'genre'
+                     },
+                     {
+                         render: function () {
+                             return 'View Book';
+                         }
+                     }
+                 ]
+             });
          });
      </script>
 }
