@@ -45,7 +45,7 @@
                     {
                         data: 'bookTitle',
                         render: function (data, type, row) {
-                            return '<button class="btn btn-sm btn-link" onclick="ViewBook(&#39;' + row.id + '&#39;)">' + data +'</button>';
+                            return '<button class="btn btn-sm btn-link" onclick="BookSpaNs.Books.viewBook(&#39;' + row.id + '&#39;)">' + data +'</button>';
                         }
                     },
                     {
@@ -56,14 +56,25 @@
                     },
                     {
                         render: function (data, type, row) {
-                            return '<button class="btn btn-sm btn-link" onclick="ViewBook(&#39;' + row.id + '&#39;)">View Book</button>';
+                            return '<button class="btn btn-sm btn-link" onclick="BookSpaNs.Books.viewBook(&#39;' + row.id + '&#39;)">View Book</button>';
                         }
                     }
                 ]
             });
         });
-        function ViewBook(id) {
-            alert('The book to view: ' + id);
-        }
+
+        // adding a namespace
+        var BookSpaNs = BookSpaNs || {};
+
+        BookSpaNs.Books = function () {
+            var viewBook = function (id) {
+                alert('The book to view:-- ' + id);
+            }
+
+            return {
+                viewBook: viewBook
+            }
+        }();
+
     </script>
 }
