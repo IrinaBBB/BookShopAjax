@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookShop.Models
 {
@@ -9,6 +10,7 @@ namespace BookShop.Models
         public int Id { get; set; }
 
         [DisplayName("Book Title")]
+        [Required]
         public string BookTitle { get; set; }
 
         [DisplayName("Book Author")]
@@ -20,7 +22,7 @@ namespace BookShop.Models
         [DisplayName("The Year Book was published")]
         public string YearPublished { get; set; }
 
-        [DisplayName("Book was CHecked Out")]
+        [DisplayName("Book was Checked Out")]
         public bool IsCheckedOut { get; set; }
 
         public IList<SelectListItem> Authors { get; set; } =

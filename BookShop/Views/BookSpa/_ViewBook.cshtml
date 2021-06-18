@@ -8,12 +8,9 @@
 <div>
     <hr />
     <dl class="row">
-        <dt class="col-sm-4">
-            @Html.DisplayNameFor(model => model.Id)
-        </dt>
-        <dd class="col-sm-8">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
+
+        @Html.HiddenFor(m => m.Id)
+
         <dt class="col-4">
             @Html.DisplayNameFor(model => model.BookTitle)
         </dt>
@@ -46,7 +43,7 @@
         </dd>
     </dl>
 </div>
-@*<div>
-    @Html.ActionLink("Edit", "EditBook", new { id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
-</div>*@
+<div>
+    <button class="btn btn-sm btn-link" onclick="BookSpaNs.Books.editBook(@Model.Id)">Edit Book</button>
+    <button class="btn btn-sm btn-link" onclick="BookSpaNs.Books.deleteBook(@Model.Id)">Delete Book</button>
+</div>

@@ -5,7 +5,7 @@
 <h1>Books SPA</h1>
 
 <p>
-    @Html.ActionLink("Add New Book", "EditBook", new { id = 0 })
+    <button class="btn btn-sm btn-link" onclick="BookSpaNs.Books.editBook(0, 'Adding New Book')">Add New Book</button>
 </p>
 <table class="table" id="bookList">
     <thead>
@@ -110,8 +110,69 @@
                 });
             }
 
+            var editBook = function (id, dialogTitle) {
+
+                dialogTitle = dialogTitle || 'Edit Book | Id = ' + id;
+
+                var $bookFrame = $('#bookFrame');
+                $.ajax({
+                    url: '/BookSpa/EditBook',
+                    method: 'GET',
+                    data: {
+                        id: id
+                    }
+                })
+                .done(function (result) {
+                    $bookFrame
+                        .html(result)
+                        .dialog('option', 'height', 700)
+                        .dialog('option', 'width', 800)
+                        .dialog('option', 'title', dialogTitle)
+                        .dialog('open');
+                })
+                .fail(function () {
+                    $bookFrame.html('Specified record was not found');
+                });
+            };
+
+            var bookSaveSuccess = function (result, textStatus, xhr) {
+                $('#bookFrame').html(result);
+                $('#bookList').DataTable().ajax.reload();
+            };
+
+            var bookSaveFailure = function (xhr, textStatus, responseStatusDescription) {
+                alert(xhr.status);
+            };
+
+            var deleteBook = function (id) {
+
+                if (!confirm('Are you sure you want to delete this book?'))
+                    return;
+
+                var $bookFrame = $('#bookFrame');
+                $.ajax({
+                    url: '/BookSpa/DeleteBook',
+                    method: 'DELETE',
+                    data: {
+                        id: id
+                    }
+                })
+                .done(function (result) {
+                    $bookFrame.dialog('close');
+                    $('#bookList').DataTable().ajax.reload();
+                })
+                .fail(function () {
+                    $bookFrame.html('Error deleting the record!');
+                });
+
+            };
+
             return {
-                viewBook: viewBook
+                viewBook: viewBook,
+                editBook: editBook,
+                bookSaveSuccess: bookSaveSuccess,
+                bookSaveFailure: bookSaveFailure,
+                deleteBook: deleteBook
             }
         }();
 

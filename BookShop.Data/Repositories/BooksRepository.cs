@@ -86,7 +86,7 @@ namespace BookShop.Data.Repositories
             return book;
         }
 
-        public bool SaveBook(IBookEditDto book)
+        public (bool isSuccessful, int bookId, string message) SaveBook(IBookEditDto book)
         {
             Book bookEntity;
 
@@ -109,7 +109,7 @@ namespace BookShop.Data.Repositories
 
             _context.SaveChanges();
 
-            return true;
+            return (true, bookEntity.Id, "");
         }
 
         public bool DeleteBook(int id)
