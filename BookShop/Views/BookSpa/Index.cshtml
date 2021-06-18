@@ -1,6 +1,62 @@
-﻿@{ 
-    ViewData["Title"] = "Index";
+﻿@model IEnumerable<BookShop.Shared.Interfaces.IBookListItemModel>
+
+@{
+    ViewData["Title"] = "Books SPA";
 }
 
-<h1>Index</h1>
+<h1>Books SPA</h1>
 
+<p>
+    @Html.ActionLink("Add New Book", "EditBook", new { id = 0 })
+</p>
+<table class="table" id="bookList">
+    <thead>
+        <tr>
+            <th>
+                <label>Id</label>
+            </th>
+            <th>
+                <label>Book Title</label>
+            </th>
+            <th>
+                <label>Author's Name</label>
+            </th>
+            <th>
+                <label>Genre</label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuthorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genre)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditBook", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "DeleteBook", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+     <script>
+         $(function () {
+             $("#bookList").dataTable();
+         });
+     </script>
+}
