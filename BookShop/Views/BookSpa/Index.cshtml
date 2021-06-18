@@ -26,39 +26,41 @@
         </tr>
     </thead>
     <tbody>
-       
     </tbody>
 </table>
 
 @section Scripts {
-     <script>
-         $(function () {
-             $("#bookList").dataTable({
-                 ajax: {
-                     url: '/BookSpa/GetBookList',
-                     // dataSrc is used to tell JQuery to use the whole dataset, not just its specific part
-                     dataSrc: ''
-                 },
-                 columns: [
-                     {
-                         data: 'id'
-                     },
-                     {
-                         data: 'bookTitle'
-                     },
-                     {
-                         data: 'authorName'
-                     },
-                     {
-                         data: 'genre'
-                     },
-                     {
-                         render: function () {
-                             return 'View Book';
-                         }
-                     }
-                 ]
-             });
-         });
-     </script>
+    <script>
+        $(function () {
+            $("#bookList").dataTable({
+                ajax: {
+                    url: '/BookSpa/GetBookList',
+                    // dataSrc is used to tell JQuery to use the whole dataset, not just its specific part
+                    dataSrc: ''
+                },
+                columns: [
+                    {
+                        data: 'id'
+                    },
+                    {
+                        data: 'bookTitle'
+                    },
+                    {
+                        data: 'authorName'
+                    },
+                    {
+                        data: 'genre'
+                    },
+                    {
+                        render: function (data, type, row) {
+                            return '<button class="btn btn-sm btn-link" onclick="ViewBook(&#39;' + row.id + '&#39;)">View Book</button>';
+                        }
+                    }
+                ]
+            });
+        });
+        function ViewBook(id) {
+            alert('The book to view: ' + id);
+        }
+    </script>
 }
