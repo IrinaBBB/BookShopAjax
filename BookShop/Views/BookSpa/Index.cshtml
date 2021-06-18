@@ -43,7 +43,10 @@
                         data: 'id'
                     },
                     {
-                        data: 'bookTitle'
+                        data: 'bookTitle',
+                        render: function (data, type, row) {
+                            return '<button class="btn btn-sm btn-link" onclick="ViewBook(&#39;' + row.id + '&#39;)">' + data +'</button>';
+                        }
                     },
                     {
                         data: 'authorName'
