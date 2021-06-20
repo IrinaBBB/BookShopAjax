@@ -29,9 +29,9 @@
     </tbody>
 </table>
 
-<div id="bookFrame">
+<div id="bookFrame"></div>
 
-</div>
+<div id="itemSelectorFrame"></div>
 
 @section Scripts {
     <script>
@@ -83,6 +83,17 @@
             }
         });
 
+        $('#itemSelectorFrame').dialog({
+            title: '',
+            autoOpen: false,
+            height: 200,
+            width: 600,
+            modal: true,           
+            close: function () {
+                $(this).html('');
+            }
+        });
+
         // adding a namespace
         var BookSpaNs = BookSpaNs || {};
 
@@ -125,7 +136,7 @@
                 .done(function (result) {
                     $bookFrame
                         .html(result)
-                        .dialog('option', 'height', 700)
+                        .dialog('option', 'height', 600)
                         .dialog('option', 'width', 800)
                         .dialog('option', 'title', dialogTitle)
                         .dialog('open');
@@ -167,12 +178,60 @@
 
             };
 
+            var addNewAuthor = function () {
+                event.preventDefault();
+                var $itemSelectorFrame = $('#itemSelectorFrame');
+                $.ajax({
+                    url: '/BookSpa/AddNewAuthor',
+                    method: 'GET'
+                })
+                .done(function (result) {
+                    $itemSelectorFrame
+                        .html(result)
+                        .dialog('option', 'height', 600)
+                        .dialog('option', 'width', 800)
+                        .dialog('option', 'title', 'Add New Author')
+                        .dialog('open');
+                })
+                .fail(function () {
+                    alert('Cannot open dialog')
+                });
+            };
+
+            var addNewGenre = function () {
+                event.preventDefault();
+                var $itemSelectorFrame = $('#itemSelectorFrame');
+                $.ajax({
+                    url: '/BookSpa/AddNewGenre',
+                    method: 'GET'
+                })
+                .done(function (result) {
+                    $itemSelectorFrame
+                        .html(result)
+                        .dialog('option', 'height', 600)
+                        .dialog('option', 'width', 800)
+                        .dialog('option', 'title', 'Add New Genre')
+                        .dialog('open');
+                })
+                .fail(function () {
+                    alert('Cannot open dialog')
+                });
+            };
+
+            var dialogCancelButton = function ($dialogFrame) {
+                event.preventDefault();
+                $dialogFrame.html('').dialog('close');
+            };
+
             return {
                 viewBook: viewBook,
                 editBook: editBook,
                 bookSaveSuccess: bookSaveSuccess,
                 bookSaveFailure: bookSaveFailure,
-                deleteBook: deleteBook
+                deleteBook: deleteBook,
+                addNewAuthor: addNewAuthor,
+                addNewGenre: addNewGenre,
+                dialogCancelButton: dialogCancelButton
             }
         }();
 

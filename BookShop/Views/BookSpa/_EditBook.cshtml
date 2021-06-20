@@ -27,12 +27,26 @@
             </div>
             <div class="form-group">
                 <label asp-for="AuthorId" class="control-label"></label>
-                <select asp-for="AuthorId" asp-items="Model.Authors" class="form-control"></select>
+                <div class="input-group">
+                    <select asp-for="AuthorId" class="form-control">
+                        @await Html.PartialAsync("_ItemSelector", Model.Authors)
+                    </select>
+                    <div class="input-group-append">
+                        <button onclick="BookSpaNs.Books.addNewAuthor();">Add New Author</button>
+                    </div>
+                </div>
                 <span asp-validation-for="AuthorId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="GenreId" class="control-label"></label>
-                <select asp-for="GenreId" asp-items="Model.Genres" class="form-control"></select>
+                <div class="input-group">
+                    <select asp-for="GenreId" class="form-control">
+                        @await Html.PartialAsync("_ItemSelector", Model.Genres)
+                    </select>
+                    <div class="input-group-append">
+                        <button onclick="BookSpaNs.Books.addNewGenre();">Add New Genre</button>
+                    </div>
+                </div>
                 <span asp-validation-for="GenreId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -48,7 +62,7 @@
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
-        </form>
+</form>
     </div>
 </div>
 

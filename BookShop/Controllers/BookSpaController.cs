@@ -61,12 +61,22 @@ namespace BookShop.Controllers
 
             bookDto.Authors.ToList()
                 .ForEach(a => book.Authors.Add(
-                        new SelectListItem { Text = a.Text, Value = a.Value }
+                        new SelectListItem 
+                        { 
+                            Text = a.Text, 
+                            Value = a.Value,
+                            Selected = book.AuthorId.ToString() == a.Value
+                        }
                     ));
 
             bookDto.Genres.ToList()
                 .ForEach(g => book.Genres.Add(
-                        new SelectListItem { Text = g.Text, Value = g.Value }
+                        new SelectListItem 
+                        { 
+                            Text = g.Text, 
+                            Value = g.Value,
+                            Selected = book.GenreId.ToString() == g.Value
+                        }
                     ));
 
             var authorsJson = JsonConvert.SerializeObject(book.Authors);
@@ -94,15 +104,15 @@ namespace BookShop.Controllers
 
             }
 
-                var bookDto = new BookEditDto
-                {
-                    AuthorId = book.AuthorId,
-                    BookTitle = book.BookTitle,
-                    GenreId = book.GenreId,
-                    YearPublished = book.YearPublished,
-                    IsCheckedOut = book.IsCheckedOut,
-                    Id = book.Id
-                };
+            var bookDto = new BookEditDto
+            {
+                AuthorId = book.AuthorId,
+                BookTitle = book.BookTitle,
+                GenreId = book.GenreId,
+                YearPublished = book.YearPublished,
+                IsCheckedOut = book.IsCheckedOut,
+                Id = book.Id
+            };
 
             var result = _repository.SaveBook(bookDto);
 
@@ -121,7 +131,26 @@ namespace BookShop.Controllers
             return Ok();
         }
 
-       
+        public IActionResult AddNewAuthor()
+        {
+            if (!IsAjaxRequest())
+                return Content("Information cannot be displayed");
+
+            return PartialView("_AddNewAuthor", new Models.AuthorDto());
+        }
+
+        public IActionResult AddNewGenre()
+        {
+            if (!IsAjaxRequest())
+                return Content("Information cannot be displayed");
+
+
+            return Ok();
+        }
+
+
+
+
 
         private bool IsAjaxRequest() => Request.Headers["X-Requested-With"] == "XMLHttpRequest";
     }
